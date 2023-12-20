@@ -190,7 +190,7 @@ function publishData() {
         };
 
         client.publish(topic, JSON.stringify(dataPacket));
-    }, 3000);
+    }, 5000);
 }
 
 
