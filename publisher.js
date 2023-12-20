@@ -184,7 +184,7 @@ function publishData() {
             },
             {
                 tag: 'RSSI',
-                value: 16 + random
+                value: 22
             }
             ]
         };
@@ -195,4 +195,3 @@ function publishData() {
 
 
 publishData();
-// console.log(publishInterval);

@@ -25,7 +25,7 @@ const mqttClient = mqtt.connect(connectURL, mqttConfig);
 
 // let dataReceivedFlag = false;
 
-const timeout = 5000;
+const timeout = 6000;
 
 let packetCount = 0;
 
