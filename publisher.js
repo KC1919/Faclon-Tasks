@@ -27,6 +27,8 @@ const client = mqtt.connect(connectURL, mqttConfig);
 
 // const publishInterval=(Math.floor(Math.random() * (5 - 1 + 1) + 1))*1000;
 
+// timeout: (Math.floor(Math.random() * (5 - 1 + 1) + 1))*1000,
+
 function publishData() {
     // console.log((Math.floor(Math.random() * (5 - 1 + 1) + 1))*1000);
     const interval = setInterval(() => {
@@ -190,7 +192,7 @@ function publishData() {
         };
 
         client.publish(topic, JSON.stringify(dataPacket));
-    }, 5000);
+    }, 4000);
 }
 
 
