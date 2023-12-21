@@ -3,7 +3,6 @@ const redisClient = new Redis();
 const mqtt = require('mqtt');
 const { storeDataToInfluxDb } = require('./storeData');
 const express = require('express');
-
 const app = express();
 
 app.use(express.json());
@@ -17,6 +16,8 @@ const mqttConfig = {
     clean: true
 }
 
+const devices = ['INEM_DEMO', 'DEVICE_2', 'DEVICE_3'];
+
 const devID = 'INEM_DEMO';
 const topic = `devicesIn/${devID}/data`;
 
@@ -29,7 +30,7 @@ const mqttClient = mqtt.connect(connectURL, mqttConfig);
 
 // let dataReceivedFlag = false;
 
-let timeout = 5000;
+let timeout = 7000;
 
 let packetCount = 0;
 
@@ -94,8 +95,6 @@ const subscribeToDevice = async () => {
                         // fetching device timeout time
                         const deviceTimeout = await redisClient.hget('timeout', payloadData.device);
 
-                        console.log(deviceTimeout);
-
                         // fetching device last timestamp from redis hashmap
                         let deviceData = await redisClient.hget('lastTimestamp', payloadData.device);
 
@@ -153,46 +152,54 @@ const subscribeToDevice = async () => {
     }
 }
 
-setInterval(async () => {
-    let deviceData = await redisClient.hget('lastTimestamp', devID);
-    deviceData = JSON.parse(deviceData);
+const checkLastTimestampForDevices = () => {
+    return setInterval(async () => {
 
-    const lastTimestamp = deviceData.lastTimestamp;
-    const deviceStatus = deviceData.deviceStatus;
-    const deviceTimeout = await redisClient.hget('timeout', devID);
+        devices.forEach(async (device) => {
 
-    const current_time = Date.now();
-    const timeDiff = Math.abs(current_time - lastTimestamp);
+            let deviceData = await redisClient.hget('lastTimestamp', device);
+            deviceData = JSON.parse(deviceData);
 
-    // checks if data was received
-    if (timeDiff >= deviceTimeout) {
-        console.log('Device inactive');
+            if (deviceData !== null) {
+                const lastTimestamp = deviceData.lastTimestamp;
+                const deviceStatus = deviceData.deviceStatus;
+                const deviceTimeout = await redisClient.hget('timeout', device);
 
-        if (deviceStatus === 1) {
+                const current_time = Date.now();
+                const timeDiff = Math.abs(current_time - lastTimestamp);
 
-            // mark deviceStatus as inactive
+                // checks if data was received
+                if (timeDiff >= deviceTimeout) {
+                    console.log('Device inactive');
 
-            await redisClient.hset('lastTimestamp', devID, JSON.stringify({ 'lastTimestamp': lastTimestamp, 'deviceStatus': 0 }));
+                    if (deviceStatus === 1) {
 
-            // make a data packet with RSSI:1
-            const dataPacket = {
-                device: devID,
-                time: current_time,
-                data: [{
-                    tag: 'RSSI',
-                    value: -1
-                }]
+                        // mark deviceStatus as inactive
+
+                        await redisClient.hset('lastTimestamp', device, JSON.stringify({ 'lastTimestamp': lastTimestamp, 'deviceStatus': 0 }));
+
+                        // make a data packet with RSSI:1
+                        const dataPacket = {
+                            device: device,
+                            time: current_time,
+                            data: [{
+                                tag: 'RSSI',
+                                value: -1
+                            }]
+                        }
+
+                        // send the data packet to influxDb
+                        await storeDataToInfluxDb(dataPacket);
+                    }
+                }
             }
-
-            // send the data packet to influxDb
-            await storeDataToInfluxDb(dataPacket);
-        }
-    }
-}, 6000);
+        })
+    }, 6000);
+}
 
 app.listen(3000, () => {
     console.log('Server running on port:3000');
     subscribeToDevice();
-    // checkLastTimestamp();
+    checkLastTimestampForDevices();
 });
 

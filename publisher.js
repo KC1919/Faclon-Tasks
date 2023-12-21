@@ -192,7 +192,7 @@ function publishData() {
         };
 
         client.publish(topic, JSON.stringify(dataPacket));
-    }, 4000);
+    }, 5000);
 }
 
 
