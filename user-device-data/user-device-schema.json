@@ -1,0 +1,118 @@
+const UserDeviceSchema = new mongoose.Schema({
+
+    devID: {
+        type: String
+    },
+    devName: {
+        type: String
+    },
+    devType: {
+        type: String
+    },
+    devTypeID: {
+        type: String
+    },
+    devTypeName: {
+        type: String
+    },
+    star: {
+        type: Boolean
+    },
+    canUserEdit: {
+        type: Boolean
+    },
+    topic: {
+        type: String
+    },
+    unit: {
+        type: Object
+    },
+    unitSelected: {
+        type: Object
+    },
+    params: {
+        type: Object
+    },
+    properties: {
+        type: Object
+    },
+    tags: [String
+    ],
+    location: {
+        latitude: {
+            type: Number
+        },
+        longitude: {
+            type: Number
+        }
+    },
+    sensors: {
+        type: Object
+    },
+    addedOn: {
+        type: Date,
+        default: Date.now()
+    },
+    custom: {
+        type: Object
+    },
+    mapIconConfig: {
+        type: Object
+    },
+    config: [
+        {
+        sensor: {
+            type: String
+            },
+        configParams: [
+                {
+            configName: {
+                type: String
+                    },
+            configExp: {
+                type: String
+                    }
+                }
+            ]
+        }
+    ],
+    widgets: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Widget'
+        }
+    ],
+    geoFences: [
+        {
+        name: { type: String
+            },
+        points: { type: Array
+            },
+        geofenceID: String,
+        geofenceName: String,
+        selectedContacts: [
+                {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Contact'
+                    },
+            name: String,
+            mobiles: [Number
+                    ],
+            emails: [String
+                    ]
+                }
+            ]
+        }
+    ],
+    installationDate: { type: Date
+    },
+    mapSensorConfig: [String
+    ],
+    isHidden: { type: Boolean, default: false
+    },
+    added_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+});
