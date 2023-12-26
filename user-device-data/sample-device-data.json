@@ -2,13 +2,12 @@
     "location": {
         "latitude": 19.1116793,
         "longitude": 72.88650919999999
-   
-    },
+       },
     "tags": [
         "MNFM_AD6",
         "sec:Plant A"
    
-    ],
+       ],
     "addedOn": "2023-12-06T11:13:26.586Z",
     "widgets": [],
     "mapSensorConfig": [],
@@ -22,236 +21,236 @@
                 "paramName": "m",
                 "paramValue": 1
            
-            },
+                     },
             {
                 "paramName": "c",
                 "paramValue": 0
            
-            },
+                     },
             {
                 "paramName": "min",
                 "paramValue": 0
            
-            },
+                     },
             {
                 "paramName": "max",
                 "paramValue": 100000
            
-            },
+                     },
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "FTOTAL": [
             {
                 "paramName": "m",
                 "paramValue": 1
            
-            },
+                     },
             {
                 "paramName": "c",
                 "paramValue": 0
            
-            },
+                     },
             {
                 "paramName": "min",
                 "paramValue": 0
            
-            },
+                     },
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "RTOTAL": [
             {
                 "paramName": "m",
                 "paramValue": 1
            
-            },
+                     },
             {
                 "paramName": "c",
                 "paramValue": 0
            
-            },
+                     },
             {
                 "paramName": "min",
                 "paramValue": 0
            
-            },
+                     },
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "FUNIT": [
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "TUNIT": [
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "STATUS": [
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "RSSI": [
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "PR": [
             {
                 "paramName": "m",
                 "paramValue": "1"
            
-            },
+                     },
             {
                 "paramName": "c",
                 "paramValue": "0"
            
-            },
+                     },
             {
                 "paramName": "min",
                 "paramValue": "0"
            
-            },
+                     },
             {
                 "paramName": "max",
                 "paramValue": "1000000"
            
-            },
+                     },
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "PRUNIT": [
             {
                 "paramName": "m",
                 "paramValue": "1"
            
-            },
+                     },
             {
                 "paramName": "c",
                 "paramValue": "0"
            
-            },
+                     },
             {
                 "paramName": "min",
                 "paramValue": "0"
            
-            },
+                     },
             {
                 "paramName": "max",
                 "paramValue": "10000"
            
-            },
+                     },
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ],
+              ],
         "RUNIT": [
             {
                 "paramName": "automation",
                 "paramValue": false
            
-            }
+                     }
        
-        ]
+              ]
    
-    },
+       },
     "sensors": [
         {
             "sensorId": "FLOWRATE",
             "sensorName": "Flow Rate",
             "globalName": "Flow Rate"
        
-        },
+              },
         {
             "sensorId": "FTOTAL",
             "sensorName": "Forward Totalizer",
             "globalName": "Forward Totalizer"
        
-        },
+              },
         {
             "sensorId": "RTOTAL",
             "sensorName": "Reverse Totalizer",
             "globalName": "Reverse Totalizer"
        
-        },
+              },
         {
             "sensorId": "FUNIT",
             "sensorName": "Flow Rate Unit",
             "globalName": "Flow Rate Unit"
        
-        },
+              },
         {
             "sensorId": "TUNIT",
             "sensorName": "Totalizer Unit",
             "globalName": "Totalizer Unit"
        
-        },
+              },
         {
             "sensorId": "STATUS",
             "sensorName": "Status",
             "globalName": "Status"
        
-        },
+              },
         {
             "sensorId": "PR",
             "sensorName": "Pressure",
             "globalName": "Pressure"
        
-        },
+              },
         {
             "sensorId": "PRUNIT",
             "sensorName": "pressure unit",
             "globalName": "pressure unit"
        
-        },
+              },
         {
             "sensorId": "RUNIT",
             "sensorName": "Reverse Totalizer Unit",
             "globalName": "Reverse Totalizer Unit"
        
-        },
+              },
         {
             "sensorId": "RSSI",
             "sensorName": "Network Strength",
             "globalName": "Network Strength"
        
-        }
+              }
    
-    ],
+       ],
     "devTypeID": "FLOW06",
     "devTypeName": "Flowmeter",
     "topic": "devicesIn/MNFM_AD6/data",
@@ -271,15 +270,15 @@
             "atm",
             "kg/cm2"
        
-        ],
+              ],
         "PRUNIT": [
             "BAR",
             "KG/cm2"
        
-        ],
+              ],
         "RUNIT": []
    
-    },
+       },
     "unitSelected": {
         "FLOWRATE": "",
         "FTOTAL": "",
@@ -292,25 +291,25 @@
         "PRUNIT": "BAR",
         "RUNIT": ""
    
-    },
+       },
     "properties": [
         {
             "propertyName": "connectionTimeout",
             "propertyValue": "600"
        
-        },
+              },
         {
             "propertyName": "automation",
             "propertyValue": false
        
-        },
+              },
         {
             "propertyName": "breakdownTimeout",
             "propertyValue": "7200"
        
-        }
+              }
    
-    ],
+       ],
     "added_by": "657051f7e1249a824b74851a",
     "config": [],
     "geoFences": [],
@@ -320,133 +319,133 @@
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_FLOWRATE"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_FLOWRATE+0"
            
-            }
+                     }
        
-        ],
+              ],
         "FTOTAL": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_FTOTAL"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_FTOTAL+0"
            
-            }
+                     }
        
-        ],
+              ],
         "RTOTAL": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_RTOTAL"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_RTOTAL+0"
            
-            }
+                     }
        
-        ],
+              ],
         "FUNIT": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_FUNIT"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_FUNIT+0"
            
-            }
+                     }
        
-        ],
+              ],
         "TUNIT": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_TUNIT"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_TUNIT+0"
            
-            }
+                     }
        
-        ],
+              ],
         "STATUS": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_STATUS"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_STATUS+0"
            
-            }
+                     }
        
-        ],
+              ],
         "PR": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_PR"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_PR+0"
            
-            }
+                     }
        
-        ],
+              ],
         "PRUNIT": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_PRUNIT"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_PRUNIT+0"
            
-            }
+                     }
        
-        ],
+              ],
         "RUNIT": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_RUNIT"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_RUNIT+0"
            
-            }
+                     }
        
-        ],
+              ],
         "RSSI": [
             {
                 "customShow": "Raw Variable",
                 "customVariable": "MNFM_AD6_RSSI"
            
-            },
+                     },
             {
                 "customShow": "Processed Reading",
                 "customVariable": "1*MNFM_AD6_RSSI+0"
            
-            }
+                     }
        
-        ]
+              ]
    
-    },
+       },
     "__v": 0,
     "mapIconConfig": null
 }

@@ -58,15 +58,15 @@ function publishData() {
             },
             {
                 tag: 'CUR2',
-                value: random2
+                value: random3
             },
             {
                 tag: 'CUR3',
-                value: random2
+                value: random
             },
             {
                 tag: 'FREQ',
-                value: random2
+                value: random3
             },
             {
                 tag: 'MD',
@@ -74,11 +74,11 @@ function publishData() {
             },
             {
                 tag: 'MDKW',
-                value: random2
+                value: random3
             },
             {
                 tag: 'PF1',
-                value: random2
+                value: random
             },
             {
                 tag: 'PF2',
@@ -86,7 +86,7 @@ function publishData() {
             },
             {
                 tag: 'PF3',
-                value: random2
+                value: random3
             },
             {
                 tag: 'PFAVG',
@@ -94,56 +94,56 @@ function publishData() {
             },
             {
                 tag: 'REACTIVE',
-                value: random2
+                value: random
             },
             {
                 tag: 'VOLTS1',
-                value: random2
+                value: random3
             }, {
                 tag: 'VOLTS2',
                 value: random2
             }, {
                 tag: 'VOLTS3',
-                value: random2
+                value: random
             }, {
                 tag: 'W1',
-                value: random2
+                value: random3
             }, {
                 tag: 'W2',
                 value: random2
             }, {
                 tag: 'W3',
-                value: random2
+                value: random
             }, {
                 tag: 'D18',
                 value: random2
             }, {
                 tag: 'D19',
-                value: random2
+                value: random3
             }, {
                 tag: 'D20',
                 value: random2
             }, {
                 tag: 'D21',
-                value: random2
+                value: random
             }, {
                 tag: 'D22',
                 value: random2
             }, {
                 tag: 'D23',
-                value: random2
+                value: random3
             }, {
                 tag: 'D24',
                 value: random2
             }, {
                 tag: 'D25',
-                value: random2
+                value: random
             }, {
                 tag: 'D26',
                 value: random2
             }, {
                 tag: 'D27',
-                value: random2
+                value: random3
             }, {
                 tag: 'D28',
                 value: random2
@@ -153,7 +153,7 @@ function publishData() {
             },
             {
                 tag: 'D30',
-                value: random2
+                value: random
             },
             {
                 tag: 'D31',
@@ -162,7 +162,7 @@ function publishData() {
 
             {
                 tag: 'D32',
-                value: random2
+                value: random3
             },
 
             {
@@ -172,12 +172,12 @@ function publishData() {
 
             {
                 tag: 'D34',
-                value: random2
+                value: random
             },
 
             {
                 tag: 'D35',
-                value: random2
+                value: random3
             },
 
             {
