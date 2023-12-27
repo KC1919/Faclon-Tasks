@@ -218,11 +218,10 @@ const generateReport = async (req, deviceData) => {
         sensorValueCol.alignment = { vertical: 'middle', horizontal: 'center' }
         sensorTimeCol.alignment = { vertical: 'middle', horizontal: 'center' }
 
-        let rowId=3;
         // iterate over all current cells in this column
         deviceData.forEach((sensorData, idx) => {
             sheet.addRow({
-                id: rowId++,
+                id: idx+1,
                 dev_name: devID,
                 sensor_name: sensorData.sensor,
                 sensor_value: sensorData.value,
