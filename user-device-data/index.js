@@ -1,8 +1,7 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
 const Influx = require('influx');
-const deviceData = require('./INEM_DEMO_DEVICE_DATA.json');
+// const deviceData = require('./INEM_DEMO_DEVICE_DATA.json');
 const connectDb = require('./config/connectTodb');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
@@ -17,11 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const devID = 'INEM_DEMO'
+
 const influx = new Influx.InfluxDB({
     'hostname': 'localhost',
     'database': 'deviceDb',
     'schema': [{
-        'measurement': deviceData.devID,
+        'measurement': devID,
         'fields': {
             value: Influx.FieldType.FLOAT,
             del: Influx.FieldType.INTEGER
@@ -100,6 +101,10 @@ app.get('/deviceData', verifyUser, async (req, res) => {
 
         const { deviceId } = req.body;
 
+        const deviceData = await Device.findOne({ 'devID': deviceId });
+
+        // console.log(deviceData);
+
         // check if user exist
 
         // check if device exist in user list of devices
@@ -128,34 +133,32 @@ app.get('/deviceData', verifyUser, async (req, res) => {
                 // check if the params are not null
                 if (sensorParams !== null) {
 
-                    let m;
-                    let c;
+                    let m = 1;
+                    let c = 0;
                     let min;
                     let max;
                     let y;
 
                     // extract value of each parameter from current sensor parameters
-                    sensorParams.forEach(param => {
-                        if (param.paramName === 'm') m = param.paramValue * 1;
-                        else if (param.paramName === 'c') c = param.paramValue * 1;
-                        else if (param.paramName === 'min') min = param.paramValue * 1;
-                        else if (param.paramName === 'max') max = param.paramValue * 1;
-                    })
+                    for (const { paramName, paramValue } of sensorParams) {
+                        if (paramName === 'm') m = paramValue * 1;
+                        else if (paramName === 'c') c = paramValue * 1;
+                        else if (paramName === 'min') min = paramValue * 1;
+                        else if (paramName === 'max') max = paramValue * 1;
+                    }
 
                     // get the raw value of the sensor fetched from influxDb
                     const x = sensorData.latest_value;
 
-                    // if value of m and c is not undefined, then calibrate it
-                    if (m != undefined && c != undefined) {
-                        y = m * x + c;
-                        y = (y > max) ? max : (y < min) ? min : y;
+                    // calibrate the sensor value
+                    y = m * x + c;
+                    y = (y > max) ? max : (y < min) ? min : y;
 
-                        calibratedDeviceData.push({
-                            'sensor': sensorData.sensor,
-                            'value': y,
-                            'unit': deviceData.unitSelected[sensorData.sensor]
-                        })
-                    }
+                    calibratedDeviceData.push({
+                        'sensor': sensorData.sensor,
+                        'value': y,
+                        'unit': deviceData.unitSelected[sensorData.sensor]
+                    })
                 }
             })
 
@@ -196,23 +199,68 @@ app.listen(3000, async () => {
 
 
 
+/**
+* Calculates calibrated value
+* @param {*} value Raw value
+* @param {*} calibration Params Object for particular
+* @returns calibrated value
 
-// result.forEach(sensorItem => {
-            //     if (userDevice.unitSelected[sensorItem.sensor]) {
-            //         if (userDevice.params[sensorItem.sensor]) {
-            //             const m = userDevice.params[sensorItem.sensor]?.filter(param => param.paramName == 'm')[0].paramValue
-            //             const c = userDevice.params[sensorItem.sensor]?.filter(param => param.paramName == 'c')[0].paramValue
-            //             const min = userDevice.params[sensorItem.sensor]?.filter(param => param.paramName == 'min')[0].paramValue
-            //             const max = userDevice.params[sensorItem.sensor]?.filter(param => param.paramName == 'max')[0].paramValue
-            //             const x = sensorItem.last_value
-            //             let y = (Number(m) * Number(x)) + Number(c)
-            //             y < min ? y = min : y > max ? y = max : y
-            //             const calibratedItem = {
-            //                 sensor: sensorItem.sensor,
-            //                 value: `${y} ${userDevice.unitSelected[sensorItem.sensor]}`
-            //             }
+const calibrateValue = (value, calibration = {}) => {
+    try {
+        if (calibration['m'] != undefined) {
+            // y = mx + c
+            value = (value * parseFloat(calibration['m'])) + parseFloat(calibration['c']);
+ 
+            if (calibration['min'] != undefined && value < calibration['min'])
+                return parseFloat(calibration['min']);
+            if (calibration['max'] != undefined && value > calibration['max'])
+                return parseFloat(calibration['max']);
+            return value;
+        } else
+            return value;
+    } catch (error) {
+        console.log('Calibrate Error', error);
+    }
+};
 
-            //             calibratedResult.push(calibratedItem)
-            //         }
-            //     }
-            // })
+*/
+
+
+/**
+* userDeviceSensorMetadata
+* @param {devID, sensor, added_by} param0 device sensor userID
+* @returns Params, unit, unitSelected of the sensor in device
+
+ 
+const userDeviceSensorMetadata = async ({ devID, sensor, added_by }) => {
+    try {
+        const { UserDevice } = require('../../app').db.models;
+        let userDev = await UserDevice.findOne(
+            { devID, added_by },
+            'tags params unit unitSelected'
+        );
+ 
+        // if (!userDev)
+        //     throw `User has no such device ${devID}`;
+ 
+        const returnObj = {
+            tags: userDev ? userDev.tags : [],
+            params: {},
+            unit: userDev && userDev.unit ? userDev.unit[sensor] : null,
+            unitSelected: userDev && userDev.unitSelected ? userDev.unitSelected[sensor] : null
+        };
+ 
+        if (userDev && userDev.params[sensor])
+            for (const { paramName, paramValue } of userDev.params[sensor])
+                returnObj['params'][paramName] = paramValue;
+        else
+            console.log(`${devID}: params[${sensor}] not found`);
+ 
+        return returnObj;
+    } catch (error) {
+        console.log(`userDeviceSensorMetadata Error - ${error}`);
+        return Promise.reject(error);
+    }
+};
+
+*/
