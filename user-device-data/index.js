@@ -74,7 +74,7 @@ app.post('/login', async (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000
             });
 
-            return res.status(200).json({ message: 'User logged in successfully!', success: true });
+            return res.status(200).json({ message: 'User logged in successfully!', success: true, token:token });
         }
         else {
             return res.status(401).json({ message: 'Failed to log in user!' });

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const verifyUser = async (req, res, next) => {
     try {
         const token = req.cookies['secret'];
-        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        const payload = await jwt.verify(token, process.env.JWT_SECRET);
         req.userId = payload.userId;
         next();
     } catch (error) {
