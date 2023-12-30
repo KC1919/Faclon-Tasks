@@ -319,6 +319,7 @@ app.listen(3000, async () => {
     // addDataToMongoDb();
 });
 
+module.exports = app;
 
 /**
 * Calculates calibrated value
